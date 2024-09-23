@@ -1,7 +1,3 @@
-export default function SharePage() {
-  return (
-    <main>
-      <h1 style={{ color: 'white', textAlign: 'center' }}>Share</h1>
-    </main>
-  );
+export default function ShareMealPage() {
+  return <h1>Share Meal</h1>;
 }

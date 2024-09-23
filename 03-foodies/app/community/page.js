@@ -1,7 +1,3 @@
 export default function CommunityPage() {
-  return (
-    <main>
-      <h1 style={{ color: 'white', textAlign: 'center' }}>Community</h1>
-    </main>
-  );
+  return <h1>Community</h1>;
 }
