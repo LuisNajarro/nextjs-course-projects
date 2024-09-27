@@ -1,9 +1,14 @@
-import { Suspense } from "react";
-import Link from "next/link";
+import { Suspense } from 'react';
+import Link from 'next/link';
 
-import classes from "./page.module.css";
-import MealsGrid from "@/components/meals/meals-grid";
-import { getMeals } from "@/lib/meals";
+import classes from './page.module.css';
+import MealsGrid from '@/components/meals/meals-grid';
+import { getMeals } from '@/lib/meals';
+
+export const metadata = {
+  title: 'All Meals',
+  description: 'Browse the delicious meals shared by our vibrant community.',
+};
 
 async function Meals() {
   const meals = await getMeals();
@@ -16,7 +21,7 @@ export default function MealsPage() {
     <>
       <header className={classes.header}>
         <h1>
-          Delicious meals, created by{" "}
+          Delicious meals, created by{' '}
           <span className={classes.highlight}>you</span>
         </h1>
         <p>
