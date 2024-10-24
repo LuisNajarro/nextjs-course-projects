@@ -11,6 +11,7 @@ export default function Header() {
           src={logo}
           width={100}
           height={100}
+          priority
           alt="Mobile phone with posts feed on it"
         />
       </Link>
