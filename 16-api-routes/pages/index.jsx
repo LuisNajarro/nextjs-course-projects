@@ -9,6 +9,8 @@ export default function Home() {
 
     const enteredEmail = emailInputRef.current.value;
     const enteredFeedback = feedbackInputRef.current.value;
+
+    fetch("/api/feedback");
   }
 
   return (
