@@ -1,10 +1,3 @@
-function PostDetailPage() {
-  return (
-    <>
-      <Hero />
-      <FeaturedPosts />
-    </>
-  );
-}
+function PostDetailPage() {}
 
 export default PostDetailPage;
