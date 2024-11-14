@@ -22,7 +22,7 @@ function getPostData(fileName: string) {
   return postData;
 }
 
-function getAllPosts() {
+export function getAllPosts() {
   const postFiles = fs.readdirSync(postsDirectory);
 
   const allPosts = postFiles.map((postFile) => {
@@ -36,7 +36,7 @@ function getAllPosts() {
   return sortedPosts;
 }
 
-function getFeaturedPosts() {
+export function getFeaturedPosts() {
   const allPosts = getAllPosts();
 
   const featuredPosts = allPosts.filter((post) => post.isFeatured);
