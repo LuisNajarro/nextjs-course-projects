@@ -1,5 +1,7 @@
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
+
+import type { ContactMessage } from "@/lib/types";
 
 type RequestData = {
   email: string;
@@ -8,8 +10,6 @@ type RequestData = {
 };
 
 type ResponseData = { message: string };
-
-type Message = RequestData & { id?: ObjectId };
 
 async function handler(
   req: NextApiRequest,
@@ -31,7 +31,7 @@ async function handler(
     }
 
     // Store it in a database
-    const newMessage: Message = { email, name, message };
+    const newMessage: ContactMessage = { email, name, message };
 
     let client;
 
