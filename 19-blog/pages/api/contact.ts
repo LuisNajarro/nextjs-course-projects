@@ -1,3 +1,4 @@
+import { MongoClient, ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 
 type RequestData = {
@@ -8,7 +9,12 @@ type RequestData = {
 
 type ResponseData = { message: string };
 
-function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
+type Message = RequestData & { id?: ObjectId };
+
+async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<ResponseData>,
+) {
   if (req.method === "POST") {
     const { email, name, message } = req.body as RequestData;
 
@@ -25,9 +31,29 @@ function handler(req: NextApiRequest, res: NextApiResponse<ResponseData>) {
     }
 
     // Store it in a database
-    const newMessage = { email, name, message };
+    const newMessage: Message = { email, name, message };
 
-    console.log(newMessage);
+    let client;
+
+    try {
+      client = await MongoClient.connect(process.env.MONGODB_URL);
+    } catch {
+      res.status(500).json({ message: "Could not connect to database." });
+      return;
+    }
+
+    const db = client.db("my-site");
+
+    try {
+      const result = await db.collection("messages").insertOne(newMessage);
+      newMessage.id = result.insertedId;
+    } catch {
+      client.close();
+      res.status(500).json({ message: "Storing message failed!" });
+      return;
+    }
+
+    client.close();
 
     res
       .status(201)
