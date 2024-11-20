@@ -9,6 +9,10 @@ type RequestData = {
 };
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method !== "POST") {
+    return;
+  }
+
   const data = req.body as RequestData;
 
   const { email, password } = data;
